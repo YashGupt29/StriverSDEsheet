@@ -1,16 +1,16 @@
 public class addNumRec {
     public static void main(String[] args) {
-        System.out.println(sumFirstN(3));
+        sumAll(3,0);
 
     }
-    public static long sumFirstN(long n)
-    {
-        long sum=0;
-        if(n==0){
-            return 0;
+
+    public static  void sumAll(long i,long sum) {
+        if(i==0)
+        {
+            System.out.println(sum);
+            return;
         }
-        sum=n+sumFirstN(n-1);;
-        return sum;
+        sumAll(i-1,sum+i);
 
     }
 }
