@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class findFreq {
     public static void main(String[] args) {
-        int[] arr ={1,3,1,9,2,7};
-        System.out.println(Arrays.toString(countFrequency(6, 9, arr)));
+        int[] arr ={11,14,8,3,12,14,1,7,4,3};
+        System.out.println(Arrays.toString(countFrequency(10, 14, arr)));
 
     }
     public static int[] countFrequency(int n, int x, int []nums){
