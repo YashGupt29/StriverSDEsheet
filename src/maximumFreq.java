@@ -21,6 +21,7 @@ public class maximumFreq {
             // Calculate the cost to make all elements in the current window equal to nums[right]
             // This cost is equal to (nums[right] * (right - left + 1) - sum)
             // If the cost is greater than k, we need to move the left pointer to decrease the cost
+            //formula for [4,4,4] -[1,2,4]
             while (nums[right] * (right - left + 1) - sum > k) {
                 sum -= nums[left]; // Decrement the left element
                 left++; // Move the left pointer to the right
@@ -28,6 +29,7 @@ public class maximumFreq {
 
             // Update the maximum frequency
             maxFreq = Math.max(maxFreq, right - left + 1);
+            //return nums.lenght-left
         }
 
         return maxFreq;
