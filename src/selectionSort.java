@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class selectionSort {
     public static void main(String[] args) {
         int [] arr={12,46,24,52,20,9};
-        System.out.println(Arrays.toString(sortBySelection(arr)));
+        System.out.println(Arrays.toString(sortByBubble(arr)));
 
     }
     static  int [] sortBySelection(int [] arr)
@@ -17,7 +17,6 @@ public class selectionSort {
                 {
                     min=j;
                 }
-
             }
             int temp=arr[min];
             arr[min]=arr[i];
@@ -27,6 +26,24 @@ public class selectionSort {
 
         return  arr;
 
+    }
+    static int []  sortByBubble(int [] arr)
+    {
+        int n=arr.length;
+        for(int i=n-1;i>=0;i--)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(arr[j]>arr[j+1])
+                {
+                    int temp=arr[j+1];
+                    arr[j+1]=arr[j];
+                    arr[j]=temp;
+                }
+
+            }
+        }
+        return arr;
     }
 
 }
