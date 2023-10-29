@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class selectionSort {
     public static void main(String[] args) {
         int [] arr={12,46,24,52,20,9};
-        System.out.println(Arrays.toString(sortByMerging(arr)));
+        System.out.println(Arrays.toString(sortByQuick(arr)));
     }
     static  int [] sortBySelection(int [] arr)
     {
@@ -120,6 +120,50 @@ public class selectionSort {
         {
             arr[i]= temp.get(i - low);
         }
+    }
+    static int[] sortByQuick(int [] arr){
+        quickSort(arr,0,arr.length-1);
+        return arr;
+    }
+    static  void quickSort(int [] arr, int low, int high)
+    {
+
+        if(low<high)
+        {
+            int partitionIndex=partition(arr,low,high);
+            quickSort(arr,low,partitionIndex-1);
+            quickSort(arr,partitionIndex+1,high);
+        }
+    }
+    static  int partition(int [] arr,int low ,int high)
+    {
+        int pivot=arr[low];
+        int i=low;
+        int j=high;
+        while(i<j)
+        {
+            while(arr[i]<=pivot && i<high)
+            {
+                i++;
+            }
+            while(arr[j]>pivot && j>low)
+            {
+                j--;
+            }
+            if(i<j)
+            {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[j];
+        arr[j] = pivot;
+        arr[low]= temp;
+        return j;
+
+
+
     }
 
 
