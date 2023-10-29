@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class sortByRecursion {
     public static void main(String[] args) {
         int [] arr={12,46,24,52,20,9};
-        byRecursionBubble(arr,arr.length-1);
+        byRecursionInsertion(arr,0);
         System.out.println(Arrays.toString(arr));
     }
     static void  byRecursionBubble(int [] arr,int n)
@@ -29,6 +29,24 @@ public class sortByRecursion {
         if(!swap) return;
         byRecursionBubble(arr,n-1);
 
+
+
+    }
+    static void  byRecursionInsertion(int [] arr,int index)
+    {
+        if(index>=arr.length)
+        {
+            return;
+        }
+        int j=index;
+        while(j>0 && arr[j-1]>arr[j])
+        {
+            int temp=arr[j];
+            arr[j]=arr[j-1];
+            arr[j-1]=temp;
+            j--;
+        }
+        byRecursionInsertion(arr,index+1);
 
 
     }
