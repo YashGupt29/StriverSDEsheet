@@ -13,7 +13,7 @@ public class maxConsecutiveOnes {
         {
 
 
-            }
+
             if(nums[i]==1)
             {
                if(count>=maxCount)
