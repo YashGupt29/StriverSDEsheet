@@ -8,7 +8,7 @@ public class mergeArray {
     {
         int [] a={3 ,3 ,4 ,5 ,6, 7, 8, 9, 9, 9 };
         int [] b={2, 4, 10, 10 };
-        System.out.println(sortedArray2(a,b));
+        System.out.println(sortedArrayOptimized(a,b));
 
     }
     public static List < Integer > sortedArray(int []a, int []b) {
@@ -93,5 +93,43 @@ public class mergeArray {
 
         }
         return list;
+    }
+    public static List < Integer > sortedArrayOptimized(int []a, int []b) {
+        ArrayList<Integer> list=new ArrayList<>();
+        int left= 0;
+        int right=a.length-1;
+        int low=0;
+        int high=b.length-1;
+        while(left<=right && low<=high)
+        {
+            if(a[left]<b[low])
+            {
+                if(list.isEmpty() || list.get(list.size()-1)!=a[left]) {
+                    list.add(a[left]);
+                }
+                left++;
+            }
+
+            else {
+                if(list.isEmpty() || list.get(list.size()-1)!=b[low]) {
+                    list.add(b[low]);}
+                low++;
+
+            }
+        }
+        while(left<=right)
+        {
+            if(list.get(list.size()-1)!=a[left]) {
+                list.add(a[left]);
+            }
+            left++;
+        }
+        while(low<=high)
+        {
+            if(list.get(list.size()-1)!=b[low]) {
+                list.add(b[low]);
+            }  low++;
+        }
+        return  list;
     }
 }
