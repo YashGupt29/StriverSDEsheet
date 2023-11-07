@@ -8,7 +8,7 @@ public class longestSubArray {
     public static void main(String[] args) {
         int [] arr={2,0,0,3};
 
-        System.out.println( longestSubarrayWithSumKOptimal(arr,3));
+        System.out.println( longestSubarrayWithSumKOptimalTwoPointer(arr,3));
 
     }
     public static int longestSubarrayWithSumK(int []a, long k)
@@ -63,6 +63,31 @@ public class longestSubArray {
         }
         return maxLength;
 
+    }
+    public static int longestSubarrayWithSumKOptimalTwoPointer(int []a, long k)
+    {
+        int left=0;
+        int right=0;
+        int sum=a[0];
+        int maxLength=0;
+        while(right<a.length)
+        {
+            while(left<=right && sum>k)
+            {
+                sum-=a[left];
+                left++;
+            }
+            if(sum==k)
+            {
+                maxLength=Math.max(maxLength,right-left+1);
+            }
+            right++;
+            if(right<a.length) {
+
+                sum += a[right];
+            }
+        }
+return maxLength;
     }
 
 }
