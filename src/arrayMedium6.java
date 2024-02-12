@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class arrayMedium6 {
     public static void main(String[] args) {
     int nums[]={3,1,-2,-5,2,-4};
-        System.out.println(Arrays.toString(rearrangeArray(nums)));
+        System.out.println(Arrays.toString(rearrangeArrayOptimal(nums)));
     }
     public static int[] rearrangeArray(int[] nums)
     {
@@ -26,4 +26,22 @@ public class arrayMedium6 {
 
 
     }
+    public static int[] rearrangeArrayOptimal(int[] nums) {
+        int[] newNums = new int[nums.length];
+        int positiveIndex = 0;
+        int negativeIndex = 1;
+
+        for (int num : nums) {
+            if (num > 0) {
+                newNums[positiveIndex] = num;
+                positiveIndex += 2;
+            } else {
+                newNums[negativeIndex] = num;
+                negativeIndex += 2;
+            }
+        }
+
+        return newNums;
+    }
+
 }
