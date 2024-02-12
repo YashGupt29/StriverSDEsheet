@@ -8,17 +8,14 @@ public class medium5 {
     public static  int maxProfit(int[] prices)
     {
         int min=Integer.MAX_VALUE,profit=0,maxProfit=0;
-        for (int i = 0; i < prices.length; i++)
-        {
-            if(prices[i]<min)
-            {
-                min=prices[i];
+        for (int price : prices) {
+            if (price < min) {
+                min = price;
             }
-            profit=prices[i]-min;
+            profit = price - min;
 
-            if(profit>maxProfit)
-            {
-                maxProfit=profit;
+            if (profit > maxProfit) {
+                maxProfit = profit;
             }
 
         }
