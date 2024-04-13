@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class hard8 {
     public static void main(String[] args) {
-        int [] nums1={1,2,3,0,0,0};
-        int [] nums2={2,5,6};
+        int [] nums1={1,3,5,7,0,0,0,0,0};
+        int [] nums2={0,2,6,8,9};
         merge(nums1,3,nums2,3);
 
     }
