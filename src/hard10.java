@@ -42,37 +42,42 @@ public class hard10 {
         return count;
 
     }
-    public static  int  merge(int []a,int left,int mid,int right){
-        ArrayList<Integer> list= new ArrayList<>();
-        int count=0;
-        int i=left;
-        int j=mid+1;
-        while(i<=mid && j<=right) {
-            if(a[i]<=a[j])
-            {
-                list.add(a[i]);
-                i++;
-            }
-            else {
-                list.add(a[j]);
-                j++;
-                count += mid - i + 1;
-            }
-        }
-        while(i<=mid){
-            list.add(a[i]);
-            i++;
-        }
-        while(j<=right)
-        {
-            list.add(a[j]);
-            j++;
-        }
-        for (int k = left; k <= right ; k++) {
-            a[k]=list.get(k-left);
 
+    public static  int  merge(int []arr,int low,int mid,int high){
+        ArrayList<Integer> temp = new ArrayList<>(); // temporary array
+        int left = low;      // starting index of left half of arr
+        int right = mid + 1;   // starting index of right half of arr
+
+        //storing elements in the temporary array in a sorted manner//
+
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                temp.add(arr[left]);
+                left++;
+            } else {
+                temp.add(arr[right]);
+                right++;
+            }
         }
-        return count;
+
+        // if elements on the left half are still left //
+
+        while (left <= mid) {
+            temp.add(arr[left]);
+            left++;
+        }
+
+        //  if elements on the right half are still left //
+        while (right <= high) {
+            temp.add(arr[right]);
+            right++;
+        }
+
+        // transfering all elements from temporary to arr //
+        for (int i = low; i <= high; i++) {
+            arr[i] = temp.get(i - low);
+        }
+        return 2;
 
     }
 }

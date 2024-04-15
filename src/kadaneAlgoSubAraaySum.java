@@ -1,6 +1,6 @@
 public class kadaneAlgoSubAraaySum {
     public static void main(String[] args) {
-        int[] arr = {-1};
+        int[] arr = {2,3,-2,-4,-3,1};
         int n = arr.length;
         long maxSum = maxSubarraySum(arr, n);
         System.out.println("The maximum subarray sum is: " + maxSum);
