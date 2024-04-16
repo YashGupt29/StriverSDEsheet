@@ -1,7 +1,7 @@
 public class bs1 {
     public static void main(String[] args) {
-        int [] nums={-1,0,3,5,9,12};
-        int target=2;
+        int [] nums={5,7,7,5,8,8,8,10};
+        int target=8;
         System.out.println(search(nums,target));
 
     }
