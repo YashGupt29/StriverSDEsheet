@@ -50,8 +50,7 @@ public class bs7 {
         int last=arr.length-1;
         int ans=-1;
         while(first<=last)
-        {
-            int mid=first+(last-first)/2;
+        {int mid=first+(last-first)/2;
             if(arr[mid]==x)
             {
                 ans=mid;
