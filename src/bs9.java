@@ -42,6 +42,7 @@ public class bs9 {
             if (nums[mid] == target) {
                 return true;
             }
+            //for edge cases like[1,0,1,1,1,1]
             if (nums[first] == nums[mid] && nums[mid] == nums[last]) {
                 first = first + 1;
                 last = last - 1;
