@@ -1,6 +1,6 @@
 public class bs10 {
     public static void main(String[] args) {
-        int nums []={5,1,2,3,4};
+        int nums []={35 ,43, 45, 1, 2, 9 ,12, 13, 19, 20, 26, 28, 29 ,32};
         System.out.println(findMin(nums));
 
     }
@@ -17,7 +17,7 @@ public class bs10 {
             }
             if(nums[first]<=nums[mid])
             {
-                if(nums[first]<min && min<nums[last])
+                if(nums[first]<min && min<nums[mid])
                 {
                     last=mid-1;
                 }
