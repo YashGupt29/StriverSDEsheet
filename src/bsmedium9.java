@@ -24,7 +24,6 @@ public class bsmedium9 {
             if(calculatePage(arr,mid)<=m)
             {
                 last=mid-1;//chota krna hai mid ko taaki kam book aae taaki ma zada ho
-
             }
             else {
                 first=mid+1;//bada krna mid ko taaki jada book ajae to m kam ho
