@@ -2,9 +2,9 @@ package strings;
 
 public class s2 {
     public static void main(String[] args) {
-        String s="a good   example";
+        String s="the sky is blue";
 //        System.out.println(countSpaces(s));
-        System.out.println(reverseWords(s));
+        System.out.println(reverseWordsOptimized(s));
 
     }
     public static String reverseWords(String s) {
@@ -23,6 +23,27 @@ public class s2 {
         String [] words=newString.split("\\s+");
 
         return String.join(" ",words);
+    }
+    public static String reverseWordsOptimized(String s) {
+        StringBuilder newString=new StringBuilder ();
+        s=s.trim();
+        int start=0;
+        int end=s.length()-1;
+
+        for(int i=end;i>=start;i--)
+        {
+            if(s.charAt(i)==' ')
+            {
+                newString.append(s, i+1, end+1).append(" ");
+                while(i>=start && s.charAt(i)==' ')
+                {
+                    i--;
+                }
+                end=i;
+            }
+        }
+        newString.append(s, 0, end+1);
+        return newString.toString();
     }
 
 }
