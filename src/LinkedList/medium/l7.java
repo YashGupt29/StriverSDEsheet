@@ -5,11 +5,28 @@ import java.util.ArrayList;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr []={1,2};
+        int arr []={1,2,3,4};
         ListNode head= convertll(arr);
-        head=removeNthFromEnd(head,2);
+        head=deleteMiddle(head);
         printLinkedList(head);
 
+    }
+    public static ListNode deleteMiddle(ListNode head) {
+        if(head==null)
+        {
+            return null;
+        }
+        ListNode slow=head;
+        ListNode fast=head;
+        ListNode prev=slow;
+        while(fast!=null && fast.next!=null)
+        {
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        prev.next=prev.next.next;
+        return head;
     }
     public static ListNode removeNthFromEnd(ListNode head, int n) {
         if(head.next==null)
