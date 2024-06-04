@@ -5,11 +5,75 @@ import java.util.ArrayList;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr []={1,2,3,4,5};
+        int arr []={1,2};
         ListNode head= convertll(arr);
-        head=oddEvenList(head);
+        head=removeNthFromEnd(head,2);
         printLinkedList(head);
 
+    }
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next==null)
+        {
+            return null;
+        }
+        ListNode fast=head;
+        ListNode slow=head;
+        for(int i=0;i<n;i++)
+        {
+            fast=fast.next;
+        }
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next;
+        }
+        slow.next=slow.next.next;
+        return head;
+
+    }
+    public static ListNode removeNthFromEndBrute(ListNode head, int n) {
+        int pos=listLengths(head)-n;
+        ListNode temp=head;
+        int count=1;
+        if(pos==0)
+        {
+            return head.next;
+        }
+        while(count<pos)
+        {
+            temp=temp.next;
+            count++;
+        }
+
+
+            temp.next=temp.next.next;
+
+        return head;
+
+    }
+
+    private static int listlengths(ListNode head) {
+
+        ListNode temp=head;
+        int count=0;
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        return count;
+    }
+
+    public static int listLengths(ListNode head)
+    {
+        ListNode temp=head;
+        int count=0;
+        while(temp!=null)
+        {
+            count++;
+            temp=temp.next;
+        }
+        return count;
     }
     public static ListNode oddEvenList(ListNode head) {
         ListNode odd=head;
