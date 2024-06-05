@@ -2,15 +2,64 @@ package LinkedList.medium;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr []={1,2,3,4};
+        int arr []={5,7,9,3,5,3};
         ListNode head= convertll(arr);
-        head=deleteMiddle(head);
+        head=sortList(head);
         printLinkedList(head);
 
     }
+    public static  ListNode sortList(ListNode head) {
+        if(head==null || head.next==null)
+        {
+            return head;
+        }
+        ListNode slow=head;
+        ListNode fast=head;
+        ListNode prev=head;
+        while(fast!=null && fast.next!=null)
+        {
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        prev.next=null;
+        ListNode l1=sortList(head);
+        ListNode l2=sortList(slow);
+        return mergeList(l1,l2);
+
+    }
+    public static  ListNode mergeList(ListNode l1,ListNode l2)
+    {
+        ListNode dummy=new ListNode(1);
+        ListNode temp=dummy;
+        while(l1!=null && l2!=null)
+        {
+            if(l1.val<l2.val)
+            {
+                temp.next=l1;
+                temp=l1;
+                l1=l1.next;
+
+            }
+            else {
+                temp.next=l2;
+                temp=l2;
+                l2=l2.next;
+            }
+        }
+        if(l1!=null) {
+            temp.next=l1;
+        }
+        else {
+            temp.next=l2;
+        }
+        return dummy.next;
+    }
+
     public static ListNode deleteMiddle(ListNode head) {
         if(head==null)
         {
