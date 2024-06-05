@@ -7,12 +7,98 @@ import java.util.List;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr []={2,2,2,2,2,2,2,2,2};
-        ListNode head= convertll(arr);
-        System.out.println(countlength(head));
-//        head=segregate(head);
+        int arr1 []={9,9,9,9,9,9,9};
+        int arr2 []={9,9,9,9};
+        ListNode head1= convertll(arr1);
+        ListNode head2=convertll(arr2);
+        ListNode head=addTwoNumbers(head1,head2);
         printLinkedList(head);
 
+    }
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode temp1=l1;
+        ListNode temp2=l2;
+        int ll1=countlength(temp1);
+        int ll2=countlength(temp2);
+        if(ll2>ll1)
+        {
+            return addTwoNumbers(temp2,temp1);
+        }
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead;
+
+        boolean isCarry=false;
+        while(temp1!=null)
+        {
+            int sum=0;
+            if(!isCarry)
+            {
+
+                sum += temp1.val + (temp2 != null ? temp2.val : 0);
+            }
+            else {
+                sum+=temp1.val+(temp2 != null ? temp2.val : 0)+1;
+            }
+
+            isCarry= sum >= 10;
+            current.next = new ListNode(sum%10);
+            current = current.next;
+            temp1=temp1.next;
+            temp2=temp2==null?null:temp2.next;
+
+        }
+        if(isCarry)
+        {
+            current.next=new ListNode(1);
+        }
+        return dummyHead.next;
+
+
+    }
+    public static ListNode reverseLists(ListNode head)
+    {
+        if(head==null || head.next==null)
+        {
+            return head;
+        }
+        ListNode newhead=reverseLists(head.next);
+        ListNode front=head.next;
+        front.next=head;
+        head.next=null;
+
+        return newhead;
+    }
+//    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//
+//
+//    }
+
+    public static ListNode addOne(ListNode head)
+    {
+        ListNode prev=head;
+        ListNode temp=head;
+        while(temp.next!=null)
+        {
+            if(temp.val!=9)
+            {
+                prev=temp;
+            }
+            temp=temp.next;
+        }
+       if(temp.val==9)
+       {
+           prev.val=prev.val+1;
+           prev=prev.next;
+           while(prev!=null)
+           {
+               prev.val= 0;
+               prev=prev.next;
+           }
+       }
+       else {
+           temp.val=temp.val+1;
+       }
+       return head;
     }
     public ListNode getIntersectionNodeOPtimized(ListNode headA, ListNode headB) {
         ListNode dummyA=headA;
