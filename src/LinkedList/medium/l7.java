@@ -2,14 +2,66 @@ package LinkedList.medium;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr []={2,2,2,2,2,2};
+        int arr []={2,2,2,2,2,2,2,2,2};
         ListNode head= convertll(arr);
-        head=segregate(head);
+        System.out.println(countlength(head));
+//        head=segregate(head);
         printLinkedList(head);
+
+    }
+    public ListNode getIntersectionNodeOPtimized(ListNode headA, ListNode headB) {
+        ListNode dummyA=headA;
+        ListNode dummyB=headB;
+        while(dummyA!=dummyB)
+        {
+            dummyA=dummyA==null?headB:dummyA.next;
+            dummyB=dummyB==null?headA:dummyB.next;
+        }
+        return dummyA;
+
+    }
+    public static int countlength(ListNode head)
+    {
+        int count=1;
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+            count+=1;
+        }
+        if(fast==null)
+        {
+            return 2 *(count-1);
+        }
+        return (2*count)-1;
+
+
+    }
+    public ListNode getIntersectionNode(ListNode a, ListNode b) {
+        ListNode tempa=a;
+        ListNode tempb=b;
+        HashMap<ListNode,Integer> mp=new HashMap<>();
+        while(tempa.next!=null)
+        {
+            mp.put(tempa, 1);
+            tempa = tempa.next;
+        }
+        while(tempb.next!=null)
+        {
+            if(mp.containsKey(tempb))
+            {
+                return tempb;
+            }
+            tempb=tempb.next;
+        }
+        return null;
 
     }
     static ListNode segregate(ListNode head) {
