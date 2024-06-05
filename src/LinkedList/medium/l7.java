@@ -6,10 +6,51 @@ import java.util.List;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr []={5,7,9,3,5,3};
+        int arr []={2,2,2,2,2,2};
         ListNode head= convertll(arr);
-        head=sortList(head);
+        head=segregate(head);
         printLinkedList(head);
+
+    }
+    static ListNode segregate(ListNode head) {
+        ListNode zero=new ListNode(-1);
+        ListNode zerohead=zero;
+        ListNode one=new ListNode(-1);
+        ListNode headone=one;
+        ListNode two=new ListNode(-1);
+        ListNode headtwo=two;
+        ListNode temp=head;
+        ListNode newhead=new ListNode(-1);
+        int count=0;
+        while(temp!=null)
+        {
+            if(temp.val==0)
+            {
+                zero.next=temp;
+                zero=temp;
+                temp=temp.next;
+                if(count==0) newhead=temp;
+                count++;
+
+            } else if (temp.val==1) {
+                one.next=temp;
+                one=temp;
+                temp=temp.next;
+                if(count==0) newhead=temp;
+                count++;
+            } else if (temp.val==2) {
+                two.next=temp;
+                two=temp;
+                temp=temp.next;
+                if(count==0) newhead=temp;
+                count++;
+            }
+
+        }
+        if(zero!=null) zero.next=headone.next!=null?headone.next:headtwo.next;
+        if(one!=null) one.next=headtwo.next;
+        if(two!=null) two.next=null;
+        return zero.next;
 
     }
     public static  ListNode sortList(ListNode head) {
