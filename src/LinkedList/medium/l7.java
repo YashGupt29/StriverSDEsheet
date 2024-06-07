@@ -4,15 +4,132 @@ package LinkedList.medium;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class l7 {
     public static void main(String[] args) {
-        int arr1 []={9,9,9,9,9,9,9};
+        int arr1 []={0,1,2};
         int arr2 []={9,9,9,9};
-        ListNode head1= convertll(arr1);
-        ListNode head2=convertll(arr2);
-        ListNode head=addTwoNumbers(head1,head2);
+        ListNode head=convertll(arr1);
+        head=copyRandomList(head);
+
         printLinkedList(head);
+
+    }
+    public static ListNode copyRandomList(ListNode head) {
+        ListNode temp=head;
+        while(temp!=null)
+        {
+            ListNode copyNode=new ListNode(temp.val);
+            copyNode.next=temp.next;
+            temp.next=copyNode;
+            temp=temp.next.next;
+        }
+        return  head;
+
+    }
+    public static ListNode rotateRights(ListNode head, int k) {
+        ListNode tail=head;
+        int len=1;
+        while(tail.next!=null)
+        {
+            tail=tail.next;
+            len++;
+        }
+        tail.next=head;
+
+        int rotationPoint=len-k%len;
+        tail=head;
+        while(rotationPoint-->1)
+        {
+            tail=tail.next;
+        }
+        head=tail.next;
+        tail.next=null;
+        return head;
+    }
+    public static ListNode rotateRight(ListNode head, int k) {
+        while(k-->0)
+        {
+            head=split(head);
+        }
+        return head;
+
+
+    }
+    public static ListNode split(ListNode head)
+    {
+        if(head==null || head.next==null)
+        {
+            return head;
+        }
+        ListNode temp=head;
+        ListNode prev=temp;
+        while(temp.next!=null)
+        {
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=null;
+        temp.next=head;
+        return temp;
+    }
+    public static ListNode reverseLis(ListNode head)
+    {
+        if(head==null || head.next==null)
+        {
+            return head;
+        }
+        ListNode newhead=reverseLis(head.next);
+        ListNode front=head.next;
+        head.next=null;
+        front.next=head;
+        return newhead;
+
+    }
+
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        ListNode temp=head;
+        ListNode prevNode=null;
+        while(temp!=null)
+        {
+            ListNode KthNode=findKthNode(temp,k);
+            if(KthNode==null)
+            {
+                if(prevNode!=null)
+                {
+                    prevNode.next=temp;
+                }
+                break;
+            }
+            ListNode nextNode=KthNode.next;
+            KthNode.next=null;
+            reverseLists(temp);
+            if(temp==head)
+            {
+                head=KthNode;
+            }
+            else {
+                prevNode.next=KthNode;
+            }
+            prevNode=temp;
+            temp=nextNode;
+
+
+        }
+        return head;
+
+
+    }
+    public static ListNode findKthNode(ListNode head,int k)
+    {
+        ListNode temp=head;
+        while(temp!=null && k>1)
+        {
+            k--;
+            temp=temp.next;
+        }
+        return temp;
 
     }
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
