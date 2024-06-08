@@ -3,7 +3,7 @@ package recursion;
 public class r7 {
     public static void main(String[] args)
     {
-        int [] arr={2,5,1,4,3};
+        int [] arr={5,2,3,10,6,8};
         System.out.println(perfectSum(arr,0,10));
 
     }
