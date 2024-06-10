@@ -5,7 +5,7 @@ import java.util.List;
 
 public class r5 {
     public static void main(String[] args) {
-        System.out.println( subsets(new int []{1,2,3}));
+        System.out.println( subsets(new int []{1,2,2}));
 
     }
     public static List<List<Integer>> subsets(int[] nums) {
