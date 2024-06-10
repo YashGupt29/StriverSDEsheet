@@ -5,8 +5,8 @@ import java.util.List;
 
 public class r9 {
     public static void main(String[] args) {
-        int [] arr={2,3,5};
-        System.out.println(combinationSum(arr,8));
+        int [] arr={2,5,2,1,2};
+        System.out.println(combinationSum(arr,5));
 
     }
     public static List<List<Integer>> combinationSum(int[] candidates, int target)
