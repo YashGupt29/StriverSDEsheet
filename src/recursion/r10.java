@@ -7,8 +7,8 @@ import java.util.List;
 
 public class r10 {
     public static void main(String[] args) {
-        int [] arr={1,1,1,2,2};
-                System.out.println(combinationSum2(arr,4));
+        int [] arr={1,2,3,4,5,6,7,8,9};
+                System.out.println(combinationSum2(arr,9));
 
     }
     public static List<List<Integer>> combinationSum2(int[] candidates, int target)

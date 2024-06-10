@@ -6,10 +6,10 @@ import java.util.List;
 
 public class r11 {
     public static void main(String[] args) {
-        Integer[] array = {5, 2, 1};
+        Integer[] array = {1,2,8,9};
         List<Integer> list = Arrays.asList(array);
         ArrayList<Integer> arr = new ArrayList<>(list);
-        System.out.println(subsetSums(arr,2));
+        System.out.println(subsetSums(arr,9));
 
 
 
