@@ -42,11 +42,13 @@ public class r2 {
         {
             return false;
         }
-
+        char c=board[row][col];
+        board[row][col]='!';
         boolean top=search(board,index+1,row-1,col,word,m,n);
         boolean bottom=search(board,index+1,row+1,col,word,m,n);
         boolean right =search(board,index+1,row,col+1,word,m,n);
         boolean left=search(board,index+1,row,col-1,word,m,n);
+        board[row][col]=c;
         return top || bottom || right || left;
 
 
