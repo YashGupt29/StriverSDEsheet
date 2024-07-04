@@ -15,7 +15,7 @@ public class TreeNode {
           this.left = left;
           this.right = right;
       }
-    public static TreeNode arrayToBinaryTree(int[] arr) {
+    public static TreeNode arrayToBinaryTree(Integer[] arr) {
         if (arr == null || arr.length == 0) {
             return null;
         }
@@ -32,16 +32,18 @@ public class TreeNode {
             TreeNode current = queue.poll();
 
             // Add the left child
-            if (i < arr.length) {
-                current.left = new TreeNode(arr[i++]);
+            if (i < arr.length && arr[i] != null) {
+                current.left = new TreeNode(arr[i]);
                 queue.add(current.left);
             }
+            i++;
 
             // Add the right child
-            if (i < arr.length) {
-                current.right = new TreeNode(arr[i++]);
+            if (i < arr.length && arr[i] != null) {
+                current.right = new TreeNode(arr[i]);
                 queue.add(current.right);
             }
+            i++;
         }
 
         return root;

@@ -2,7 +2,7 @@ package binary_tree;
 
 public class m1 {
     public static void main(String[] args) {
-        int [] arr={1,2};
+        Integer [] arr={1,2};
         TreeNode root=TreeNode.arrayToBinaryTree(arr);
         System.out.println(diameterOfBinaryTree(root));
 
