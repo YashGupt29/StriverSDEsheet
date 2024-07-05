@@ -4,64 +4,56 @@ import java.util.*;
 
 public class m5 {
     public static void main(String[] args) {
-        Integer [] arr={3,9,20,null,null,15,7};
-        verticalTraversal(TreeNode.arrayToBinaryTree(arr));
+        Integer [] arr={1,2,3,4,6,5,7};
+        System.out.println(verticalTraversal(TreeNode.arrayToBinaryTree(arr)));
     }
-    public static void verticalTraversal(TreeNode root) {
-        HashMap<Integer,HashMap<Integer,Integer>> mpp=new HashMap<>();
-        Queue<TreeNode> queue=new LinkedList<>();
-        queue.add(root);
-        HashMap<Integer,Integer> innermap=new HashMap<>();
-        innermap.put(0,0);
-        mpp.put(root.val,innermap);
-
-        while(!queue.isEmpty())
-        {
-            int size=queue.size();
-            for (int i = 0; i <size ; i++) {
-                int x = 0;
-                int y = 0;
-                TreeNode node=queue.poll();
-
-                innermap = mpp.getOrDefault(node.val, new HashMap<>());
-
+    public static List<List<Integer>> verticalTraversal(TreeNode root) {
+            List<List<Integer>> ans=new ArrayList<>();
+            if(root==null) return ans;
+            TreeMap<Integer,TreeMap<Integer,List<Integer>>> mpp=new TreeMap<>();
+            Queue<Triplet> queue= new LinkedList<>();
+            queue.add(new Triplet(root,0,0));
+            while(!queue.isEmpty())
+            {
+                Triplet current=queue.poll();
+                TreeNode node=current.node;
+                int hd=current.hd;
+                int vd=current.vd;
+                mpp.putIfAbsent(hd,new TreeMap<>());
+                mpp.get(hd).putIfAbsent(vd,new ArrayList<>());
+                mpp.get(hd).get(vd).add(node.val);
                 if(node.left!=null)
                 {
-                    x=innermap.getOrDefault(0,0)-1;
-                    y=innermap.getOrDefault(0,0)+1;
-                    innermap.put(x,y);
-                    mpp.put(node.left.val,innermap);
-                    queue.add(node.left);
+                    queue.add(new Triplet(node.left,hd-1,vd+1));
                 }
                 if(node.right!=null)
                 {
-                    x = innermap.getOrDefault(0, 0);
-                    y = innermap.getOrDefault(0, 0) + 2;
-                    innermap.put(x, y);
-                    mpp.put(node.right.val,innermap);
-                    queue.add(node.right);
+                    queue.add(new Triplet(node.right,hd+1,vd+1));
                 }
-
             }
-            printNestedHashMap(mpp);
-        }
-    }
-    public static void printNestedHashMap(HashMap<Integer, HashMap<Integer, Integer>> map) {
-        // Traverse outer HashMap
-        for (Map.Entry<Integer, HashMap<Integer, Integer>> entry : map.entrySet()) {
-            int outerKey = entry.getKey();
-            HashMap<Integer, Integer> innerMap = entry.getValue();
-
-            // Traverse inner HashMap
-            for (Map.Entry<Integer, Integer> innerEntry : innerMap.entrySet()) {
-                int innerKey = innerEntry.getKey();
-                int innerValue = innerEntry.getValue();
-
-                // Print in the desired format
-                System.out.println("(" + outerKey + ",(" + innerKey + "," + innerValue + "))");
-            }
-        }
+           for(TreeMap<Integer,List<Integer>> vertical: mpp.values())
+           {
+               List<Integer> arr=new ArrayList<>();
+               for(List<Integer> node:vertical.values())
+               {
+                   Collections.sort(node);
+                   arr.addAll(node);
+               }
+               ans.add(arr);
+           }
+            return ans;
     }
 
 
+}
+class Triplet {
+    TreeNode node;
+    int hd;
+    int vd;
+    Triplet(TreeNode node,int hd,int vd)
+    {
+        this.node=node;
+        this.hd=hd;
+        this.vd=vd;
+    }
 }
