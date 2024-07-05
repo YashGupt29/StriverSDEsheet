@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 public class m7 {
     public static void main(String[] args) {
-        Integer [] arr={20,8,22,5,3,4,25,10,14};
+        Integer [] arr={20, 8, 22, 5, 3, null, 25, null, null, 10, 14};
         System.out.println(bottomView(TreeNode.arrayToBinaryTree(arr)));
 
 
