@@ -14,22 +14,20 @@ public class q3 {
         System.out.println(repetitions(s));
     }
     public static int repetitions(StringBuilder s) {
-        int maxCount = 1;  // To store the maximum repetition length
-        int currentCount = 1;  // To store the current repetition length
+        int maxCount = 1;
+        int currentCount = 1;
 
-        // Iterate through the string to find the longest repetition
         for (int i = 1; i < s.length(); i++) {
-            if (s.charAt(i) == s.charAt(i - 1)) {  // If the current character matches the previous one
-                currentCount++;  // Increment the current count
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                currentCount++;
             } else {
-                maxCount = Math.max(maxCount, currentCount);  // Update the maximum count
-                currentCount = 1;  // Reset the current count
+                maxCount = Math.max(maxCount, currentCount);
+                currentCount = 1;
             }
         }
 
-        // Check for the last repetition segment
         maxCount = Math.max(maxCount, currentCount);
 
-        return maxCount;  // Return the maximum repetition length
+        return maxCount;
     }
 }
