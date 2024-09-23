@@ -6,8 +6,8 @@ import java.util.List;
 
 public class lic3 {
     public static void main(String[] args) {
-        int [] arr={5,8,3,7,9,1};
-        System.out.println(longestSubsequence(arr.length,arr));
+        int [] arr={2,2,2,2,2};
+        System.out.println(longestSubsequences(arr.length,arr));
     }
     public static int longestSubsequences(int n, int a[]) {
         int [] dp=new int [n+1];
@@ -22,6 +22,7 @@ public class lic3 {
             }
             maxi=Math.max(maxi,dp[index]);
         }
+        System.out.println(Arrays.toString(dp));
         return maxi;
     }
     public static int longestSubsequence(int n, int[] a) {
