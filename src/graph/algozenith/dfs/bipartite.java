@@ -4,12 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class dfs {
+public class bipartite {
     public static void main(String[] args) {
         solve();
     }
     static List<List<Integer>> graph;
-    static int[] vis;
+    static int [] vis;
+    static boolean isbipartite;
+    public  static void dfs(int node,int color)
+    {
+        vis[node]=color;
+        for(int v:graph.get(node))
+        {
+            if(vis[v]==0)
+            {
+                dfs(v,1 ^ 2 ^ color);
+            }
+            else {
+                if(vis[v]==vis[node])
+                {
+                    isbipartite=false;
+                }
+            }
+        }
+
+    }
     public static void solve()
     {
         Scanner sc= new Scanner(System.in);
@@ -17,6 +36,7 @@ public class dfs {
         int m=sc.nextInt();
         graph=new ArrayList<>();
         vis=new int[n+1];
+        isbipartite=true;
         for (int i = 0; i <=n ; i++) {
             graph.add(new ArrayList<>());
         }
@@ -26,38 +46,13 @@ public class dfs {
             graph.get(a).add(b);
             graph.get(b).add(a);
         }
-        int comp=0;
         for (int i = 1; i <=n ; i++) {
             if(vis[i]==0)
             {
-                comp++;
-                dfs(i,comp);
-            }
-            
-        }
-        int [] node_size=new int[comp+1];
-        for (int i = 1; i <=n ; i++) {
-            node_size[vis[i]]++;
-        }
-        long ans=0;
-        long sum=0;
-        for (int i = 1; i <=comp ; i++) {
-            ans+=node_size[i] * sum;
-            sum+=node_size[i];
-        }
-        System.out.println(ans);
-        System.out.println("Number of components: " + comp);
-    }
-    public static void dfs(int node,int comp)
-    {
-        vis[node]=comp;
-        for(int v: graph.get(node))
-        {
-            if(vis[v]==0)
-            {
-                dfs(v,comp);
+                dfs(i,1);
             }
         }
-    }
+        System.out.println(isbipartite);
 
+    }
 }
