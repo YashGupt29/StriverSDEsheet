@@ -6,11 +6,7 @@ public class d5 {
     public static void main(String[] args) {
         // Initialize the 2D array
         int[][] array = {
-                {1},
-                {0, 2, 4},
-                {1, 3},
-                {2, 4},
-                {1, 3}
+                {1,2},{3},{3},{}
         };
 
         // Convert 2D array into ArrayList<ArrayList<Integer>>

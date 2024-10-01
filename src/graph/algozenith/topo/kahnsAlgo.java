@@ -1,4 +1,4 @@
-package graph.algozenith.dfs;
+package graph.algozenith.topo;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
