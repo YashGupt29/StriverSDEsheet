@@ -3,7 +3,8 @@ package binary_tree;
 public class h2 {
     public static void main(String[] args) {
         Integer [] arr={3,5,1,6,2,0,8,null,null,7,4};
-        System.out.println(lowestCommonAncestor(TreeNode.arrayToBinaryTree(arr),2,0));
+        TreeNode node=lowestCommonAncestor(TreeNode.arrayToBinaryTree(arr),2,0);
+        System.out.println(node.val);
 
 
     }

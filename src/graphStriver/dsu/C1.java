@@ -65,6 +65,9 @@ class UnionFind{
             rank[i]=1;
         }
     }
+    public int size() {
+        return setSize;
+    }
     public int find(int x)
     {
         if(x!=par[x])

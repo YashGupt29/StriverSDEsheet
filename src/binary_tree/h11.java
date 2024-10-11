@@ -6,7 +6,7 @@ import java.util.Queue;
 
 public class h11 {
     public static void main(String[] args) {
-        Integer [] arr={};
+        Integer [] arr={1,2,3,null,null,4,5};
         System.out.println(serialize(TreeNode.arrayToBinaryTree(arr)));
         String s=serialize(TreeNode.arrayToBinaryTree(arr));
         deserialize(s);
