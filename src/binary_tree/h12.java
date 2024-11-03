@@ -5,7 +5,7 @@ import java.util.List;
 
 public class h12 {
     public static void main(String[] args) {
-        Integer [] arr={1,2,3,4,5,null,null,null,null,null,6};
+        Integer [] arr={1,2,3,4,5,null,8,null,null,6,7,9};
         System.out.println(inorderTraversal(TreeNode.arrayToBinaryTree(arr)));
     }
     public static List<Integer> inorderTraversal(TreeNode root) {
