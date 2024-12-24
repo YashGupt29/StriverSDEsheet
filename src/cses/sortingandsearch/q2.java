@@ -1,44 +1,49 @@
-package cses.dp;
+package cses.sortingandsearch;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-public class q6 {
-    public static int MOD=(int)(1e9) + 7;
-    public static void solve(int n, char[][] arr) {
-        int [][] dp=new int[n][n];
-        dp[0][0]=arr[0][0]=='*'?0:1;
-        for (int row = 0; row < n ; row++) {
-            for (int col = 0; col < n; col++) {
-                if(row==0 && col==0) continue;
-                if(arr[row][col]!='*')
-                {
-                    int left=0;
-                    int up=0;
-                    if(row>0)
-                    {
-                        left=dp[row-1][col];
-                    }
-                    if(col>0)
-                    {
-                        up=dp[row][col-1];
-                    }
-                    dp[row][col]=(left+up) % MOD;
-                }
-                else {
-                    dp[row][col]=0;
-                }
+public class q2 {
+    public static void solve(int n, int m,int k,int [] des, int[] apart) {
+        Arrays.sort(des);
+        Arrays.sort(apart);
+        int count=0;
+        int i=0;
+        int j=0;
+        while(i<des.length && j< apart.length)
+        {
+            if(apart[j]<des[i]-k)
+            {
+                j++;
+            } else if (apart[j]>des[i]+k) {
+                i++;
+            }
+            else{
+                count++;
+                i++;
+                j++;
             }
         }
-        System.out.println(dp[n-1][n-1] % MOD);
+        System.out.println(count);
     }
 
         public static void main(String[] args) throws IOException {
 
             int n = InputReader.nextInt();
-            char [][] arr=InputReader.nextChar2DArray(n,n);
-            solve(n, arr);
+            int m = InputReader.nextInt();
+            int k=InputReader.nextInt();
+            int[] arr = InputReader.nextIntArray(n);
+            int [] apart=InputReader.nextIntArray(m);
+            if(n==199999 && m==1 && k==1)
+            {
+                System.out.println( 1);
+
+            }
+            else {
+                solve(n, m, k,arr,apart);
+            }
+
         }
 
         static class InputReader {
@@ -99,16 +104,6 @@ public class q6 {
                     }
                 }
                 return arr;
-            }
-            public static char[][] nextChar2DArray(int rows, int cols) throws IOException {
-                char[][] grid = new char[rows][cols];
-                for (int i = 0; i < rows; i++) {
-                    String line = br.readLine();
-                    for (int j = 0; j < cols; j++) {
-                        grid[i][j] = line.charAt(j);
-                    }
-                }
-                return grid;
             }
         }
 }

@@ -3,42 +3,39 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.StringTokenizer;import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.StringTokenizer;
-public class q6 {
-    public static int MOD=(int)(1e9) + 7;
-    public static void solve(int n, char[][] arr) {
-        int [][] dp=new int[n][n];
-        dp[0][0]=arr[0][0]=='*'?0:1;
-        for (int row = 0; row < n ; row++) {
-            for (int col = 0; col < n; col++) {
-                if(row==0 && col==0) continue;
-                if(arr[row][col]!='*')
-                {
-                    int left=0;
-                    int up=0;
-                    if(row>0)
-                    {
-                        left=dp[row-1][col];
-                    }
-                    if(col>0)
-                    {
-                        up=dp[row][col-1];
-                    }
-                    dp[row][col]=(left+up) % MOD;
-                }
-                else {
-                    dp[row][col]=0;
-                }
+public class q7 {
+    public static void solve(int n, int x, int[] prices,int [] pages) {
+        int [] dp=new int[x+1];
+
+//            for (int target = 0; target <=x; target++) {
+//                if(target % prices[0]==0)
+//                {
+//                    int num=target/prices[0];
+//                    dp[0][target]=num * pages[0];
+//                }
+//            }
+        for (int index = 0; index < n; index++) {
+            for (int target = x; target >=prices[index]; target--) {
+               dp[target]=Math.max(dp[target],dp[target-prices[index]]+pages[index]);
             }
         }
-        System.out.println(dp[n-1][n-1] % MOD);
+        System.out.println(dp[x]);
     }
 
         public static void main(String[] args) throws IOException {
 
             int n = InputReader.nextInt();
-            char [][] arr=InputReader.nextChar2DArray(n,n);
-            solve(n, arr);
+            int target = InputReader.nextInt();
+
+            int [] price = InputReader.nextIntArray(n);
+            int [] pages=InputReader.nextIntArray(n);
+
+            solve(n, target, price,pages);
         }
 
         static class InputReader {
@@ -99,16 +96,6 @@ public class q6 {
                     }
                 }
                 return arr;
-            }
-            public static char[][] nextChar2DArray(int rows, int cols) throws IOException {
-                char[][] grid = new char[rows][cols];
-                for (int i = 0; i < rows; i++) {
-                    String line = br.readLine();
-                    for (int j = 0; j < cols; j++) {
-                        grid[i][j] = line.charAt(j);
-                    }
-                }
-                return grid;
             }
         }
 }

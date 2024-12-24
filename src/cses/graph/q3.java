@@ -1,44 +1,55 @@
-package cses.dp;
+package cses.graph;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.StringTokenizer;
-public class q6 {
-    public static int MOD=(int)(1e9) + 7;
-    public static void solve(int n, char[][] arr) {
-        int [][] dp=new int[n][n];
-        dp[0][0]=arr[0][0]=='*'?0:1;
-        for (int row = 0; row < n ; row++) {
-            for (int col = 0; col < n; col++) {
-                if(row==0 && col==0) continue;
-                if(arr[row][col]!='*')
+import java.util.*;
+
+public class q3 {
+        public static void solve(int n, int m, List<List<Integer>> graph) {
+            boolean [] visited=new boolean[n+1];
+            List<Integer> ans=new ArrayList<>();
+            int comp=0;
+            for (int i = 1; i <=n; i++) {
+                if(!visited[i])
                 {
-                    int left=0;
-                    int up=0;
-                    if(row>0)
-                    {
-                        left=dp[row-1][col];
-                    }
-                    if(col>0)
-                    {
-                        up=dp[row][col-1];
-                    }
-                    dp[row][col]=(left+up) % MOD;
-                }
-                else {
-                    dp[row][col]=0;
+                    ans.add(i);
+                    comp++;
+                    dfs(i,visited,graph);
                 }
             }
+            System.out.println(comp-1);
+            for (int i = 1; i < ans.size(); i++) {
+                System.out.print(ans.get(i-1)+ " ");
+                System.out.println(ans.get(i));
+            }
         }
-        System.out.println(dp[n-1][n-1] % MOD);
-    }
+        public static void dfs(int node,boolean [] visited,List<List<Integer>> graph)
+        {
+            visited[node]=true;
+            for(int currNode:graph.get(node))
+            {
+                if(!visited[currNode])
+                {
+                    dfs(currNode,visited,graph);
+                }
+
+            }
+        }
 
         public static void main(String[] args) throws IOException {
 
             int n = InputReader.nextInt();
-            char [][] arr=InputReader.nextChar2DArray(n,n);
-            solve(n, arr);
+            int m = InputReader.nextInt();
+            int [][] arr=InputReader.nextInt2DArray(m,2);
+            List<List<Integer>> graph=new ArrayList<>();
+            for (int i = 0; i <=n ; i++) {
+                graph.add(new ArrayList<>());
+            }
+            for (int i = 0; i < arr.length; i++) {
+                graph.get(arr[i][1]).add(arr[i][0]);
+                graph.get(arr[i][0]).add(arr[i][1]);
+            }
+            solve(n, m, graph);
         }
 
         static class InputReader {
@@ -99,16 +110,6 @@ public class q6 {
                     }
                 }
                 return arr;
-            }
-            public static char[][] nextChar2DArray(int rows, int cols) throws IOException {
-                char[][] grid = new char[rows][cols];
-                for (int i = 0; i < rows; i++) {
-                    String line = br.readLine();
-                    for (int j = 0; j < cols; j++) {
-                        grid[i][j] = line.charAt(j);
-                    }
-                }
-                return grid;
             }
         }
 }

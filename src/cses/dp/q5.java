@@ -3,20 +3,32 @@ package cses.dp;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class q5 {
-    public static void solve(int n, int target, int[] arr) {
+    public static void solve(int n) {
+        int [] dp=new int[n+1];
+        Arrays.fill(dp,Integer.MAX_VALUE);
+        dp[0]=0;
+        for (int i = 1; i <=n; i++) {
+             String num2str=Integer.toString(i);
+             for(char ch:num2str.toCharArray())
+             {
+                 int digit=ch-'0';
+                 if(digit!=0)
+                 {
+                     dp[i]=Math.min(dp[i],dp[i-digit] + 1);
+                 }
+             }
+        }
+        System.out.println(dp[n]);
     }
 
     public static void main(String[] args) throws IOException {
 
         int n = InputReader.nextInt();
-        int target = InputReader.nextInt();
-
-        int[] arr = InputReader.nextIntArray(n);
-
-        solve(n, target, arr);
+        solve(n);
     }
 
     static class InputReader {

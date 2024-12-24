@@ -2,43 +2,42 @@ package cses.dp;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.Arrays;
+import java.sql.SQLOutput;
+import java.util.List;
 import java.util.StringTokenizer;
-public class q6 {
-    public static int MOD=(int)(1e9) + 7;
-    public static void solve(int n, char[][] arr) {
-        int [][] dp=new int[n][n];
-        dp[0][0]=arr[0][0]=='*'?0:1;
-        for (int row = 0; row < n ; row++) {
-            for (int col = 0; col < n; col++) {
-                if(row==0 && col==0) continue;
-                if(arr[row][col]!='*')
+
+public class q10 {
+    public static void solve(String word1,String word2) {
+       int n=word1.length();
+       int m=word2.length();
+       int [][] dp=new int[n+1][m+1];
+        for (int i = 0; i <=m ; i++) {
+            dp[0][i]=i;
+        }
+        for (int i = 0; i <=n ; i++) {
+            dp[i][0]=i;
+        }
+        for (int i = 1; i <=n; i++) {
+            for (int j = 1; j <=m; j++) {
+                if(word1.charAt(i-1)==word2.charAt(j-1))
                 {
-                    int left=0;
-                    int up=0;
-                    if(row>0)
-                    {
-                        left=dp[row-1][col];
-                    }
-                    if(col>0)
-                    {
-                        up=dp[row][col-1];
-                    }
-                    dp[row][col]=(left+up) % MOD;
-                }
-                else {
-                    dp[row][col]=0;
+                    dp[i][j]= dp[i-1][j-1];
+                }else {
+                    dp[i][j]=Math.min(1+dp[i-1][j-1],Math.min(1+ dp[i-1][j],1+ dp[i][j-1]));
                 }
             }
         }
-        System.out.println(dp[n-1][n-1] % MOD);
+        int ans = dp[n][m];
+
+        System.out.println(ans);
     }
+    public static void main(String[] args) throws IOException {
 
-        public static void main(String[] args) throws IOException {
+            String word1=InputReader.nextLine();
+            String word2=InputReader.nextLine();
 
-            int n = InputReader.nextInt();
-            char [][] arr=InputReader.nextChar2DArray(n,n);
-            solve(n, arr);
+           solve(word1,word2);
+
         }
 
         static class InputReader {
@@ -51,6 +50,10 @@ public class q6 {
                     st = new StringTokenizer(br.readLine());
                 }
                 return st.nextToken();
+            }
+
+            public static String nextLine() throws IOException {
+                return br.readLine();
             }
 
             public static int nextInt() throws IOException {
@@ -99,16 +102,6 @@ public class q6 {
                     }
                 }
                 return arr;
-            }
-            public static char[][] nextChar2DArray(int rows, int cols) throws IOException {
-                char[][] grid = new char[rows][cols];
-                for (int i = 0; i < rows; i++) {
-                    String line = br.readLine();
-                    for (int j = 0; j < cols; j++) {
-                        grid[i][j] = line.charAt(j);
-                    }
-                }
-                return grid;
             }
         }
 }

@@ -3,42 +3,55 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.StringTokenizer;import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.StringTokenizer;
-public class q6 {
-    public static int MOD=(int)(1e9) + 7;
-    public static void solve(int n, char[][] arr) {
-        int [][] dp=new int[n][n];
-        dp[0][0]=arr[0][0]=='*'?0:1;
-        for (int row = 0; row < n ; row++) {
-            for (int col = 0; col < n; col++) {
-                if(row==0 && col==0) continue;
-                if(arr[row][col]!='*')
+public class q8 {
+    static final int MOD = (int) (1e9) + 7;
+    public static void solve(int n, int m, int[] arr) {
+
+        int [][] dp=new int[n][m+1];
+        if(arr[0]!=0)
+        {
+            dp[0][arr[0]]=1;
+        }else {
+            for (int i = 1; i <=m ; i++) {
+                dp[0][i]=1;
+            }
+        }
+        for (int i = 1; i <n ; i++) {
+            for (int j = 1; j <=m ; j++) {
+                if(arr[i]==0 || arr[i]==j)
                 {
-                    int left=0;
-                    int up=0;
-                    if(row>0)
-                    {
-                        left=dp[row-1][col];
-                    }
-                    if(col>0)
-                    {
-                        up=dp[row][col-1];
-                    }
-                    dp[row][col]=(left+up) % MOD;
-                }
-                else {
-                    dp[row][col]=0;
+                    dp[i][j]=dp[i-1][j];
+                    if (j > 1) dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MOD;
+                    if (j < m) dp[i][j] = (dp[i][j] + dp[i - 1][j + 1]) % MOD;
                 }
             }
         }
-        System.out.println(dp[n-1][n-1] % MOD);
+        long ans=0;
+        if(arr[n-1]==0)
+        {
+            for (int j = 1; j <=m ; j++) {
+                ans+=dp[n-1][j];
+            }
+        }else {
+            ans=dp[n-1][arr[n-1]];
+        }
+        System.out.println(ans % MOD);
+
     }
 
         public static void main(String[] args) throws IOException {
 
             int n = InputReader.nextInt();
-            char [][] arr=InputReader.nextChar2DArray(n,n);
-            solve(n, arr);
+            int target = InputReader.nextInt();
+
+            int[] arr = InputReader.nextIntArray(n);
+
+            solve(n, target, arr);
         }
 
         static class InputReader {
@@ -99,16 +112,6 @@ public class q6 {
                     }
                 }
                 return arr;
-            }
-            public static char[][] nextChar2DArray(int rows, int cols) throws IOException {
-                char[][] grid = new char[rows][cols];
-                for (int i = 0; i < rows; i++) {
-                    String line = br.readLine();
-                    for (int j = 0; j < cols; j++) {
-                        grid[i][j] = line.charAt(j);
-                    }
-                }
-                return grid;
             }
         }
 }
